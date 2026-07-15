@@ -369,6 +369,57 @@ export const portfolioData: PortfolioData = {
     experiences: [
         {
             id: 'prof-1',
+            company: 'Confidential Jobs',
+            position: 'Frontend Developer, ML Engineer and Product Developer',
+            description: 'Working on a confidential product currently in prototype stage, focused on frontend development and building the recommendation engine alongside two collaborators. Leading product planning and development management, defining feature direction and prioritizing functionality for upcoming iterations.',
+            responsibilities: [
+                'Working on a confidential product currently in prototype stage, focused on frontend development and building the recommendation engine alongside two collaborators.',
+                'Leading product planning and development management, defining feature direction and prioritizing functionality for upcoming iterations.',
+                'Using AI-assisted development workflows to implement frontend features and support recommendation engine development.',
+                'Collaborating in a three-person team, balancing hands-on technical contribution with ownership of product roadmap and feature scope.'
+            ],
+            skills: [
+                'Frontend Development',
+                'Machine Learning',
+                'Recommendation Engine',
+                'Product Management',
+                'AI-Assisted Development'
+            ],
+            startDate: '2026-06-01',
+            endDate: '',
+            isOngoing: true,
+            location: 'Remote',
+            type: 'full-time',
+            logo: '/assets/confidential-logo.png',
+            note: 'Project details are confidential and not shared publicly.'
+        },
+        {
+            id: 'prof-2',
+            company: 'Magizh Dazzlers',
+            position: 'Freelance Full-Stack Developer (AI-Assisted Development)',
+            description: 'Planned and delivered a complete e-commerce platform for a gold-plated jewellery business, owning requirements, architecture, and end-to-end execution independently. Managed the full project lifecycle from client discovery through deployment.',
+            responsibilities: [
+                'Planned and delivered a complete e-commerce platform for a gold-plated jewellery business, owning requirements, architecture, and end-to-end execution independently.',
+                'Directed frontend, backend, and database development using AI-assisted coding workflows, translating business requirements into functional technical specifications.',
+                'Managed the full project lifecycle from client discovery through deployment, including product catalog structure, order flow, and database schema design.',
+                'Delivered a production-ready platform as an independent contributor, demonstrating the ability to plan, manage, and ship a client project end-to-end.'
+            ],
+            skills: [
+                'Full-Stack Development',
+                'E-Commerce',
+                'AI-Assisted Development',
+                'Database Design',
+                'Project Management'
+            ],
+            startDate: '2026-04-01',
+            endDate: '2026-05-31',
+            isOngoing: false,
+            location: 'Remote',
+            type: 'freelance',
+            logo: '/assets/magizh-dazzlers-logo.png'
+        },
+        {
+            id: 'prof-3',
             company: 'Independent Client Projects',
             position: 'Freelance Data Analyst / ML Developer',
             description: 'Built a Random Forest classifier on land documentation data with imbalanced class distribution, lifting Precision by 33% (0.22 to 0.30) and F1-score 3x over baseline. Deployed an interactive Streamlit dashboard for real-time land approval prediction. Analyzed a survey-based gaming addiction dataset, extracted the top 5 behavioural risk indicators through feature selection using Random Forest, and presented findings in a Streamlit dashboard.',
@@ -392,7 +443,7 @@ export const portfolioData: PortfolioData = {
             logo: '/assets/freelance-logo.png'
         },
         {
-            id: 'prof-2',
+            id: 'prof-4',
             company: 'The American College, Madurai',
             position: 'Student Operations Assistant, Dept. of Data Science',
             description: 'Created a department data tracking system using Excel and Google Sheets, cutting weekly report generation time by 40% across a 15-member team. Coordinated documentation for 5+ departmental events per year, eliminating last-minute handoff gaps and standardizing cross-team workflows.',
@@ -414,7 +465,7 @@ export const portfolioData: PortfolioData = {
             logo: '/assets/american-college-logo.png'
         },
         {
-            id: 'prof-3',
+            id: 'prof-5',
             company: 'DATA VAGANZA, Department Symposium, The American College',
             position: 'Web & Application Developer',
             description: 'Designed and shipped the official event website and registration application for 200+ participants, maintaining 100% uptime across the full event window. Managed the complete deployment lifecycle from local development to live production with zero rollbacks.',

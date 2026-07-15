@@ -25,7 +25,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
   const instagramRef = useRef(null);
   const zapRef = useRef(null);
   const zapSmallRef = useRef(null);
-  const botRef = useRef(null);
+
 
   useEffect(() => {
     if (!isExiting) return;
@@ -106,16 +106,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
         force3D: true
       });
 
-      // Bot floating - Responsive and smooth
-      gsap.to(botRef.current, {
-        rotation: 8,
-        y: -10,
-        duration: 1.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        force3D: true
-      });
+
     });
 
     return () => ctx.revert();
@@ -254,19 +245,9 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
             >
               <span className="">& ML</span>
               <div
-                ref={botRef}
-                className="mx-[0.05em] relative cursor-pointer group"
-                onClick={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  window.dispatchEvent(new CustomEvent('portfolio:toggle-chatbot', {
-                    detail: { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
-                  }));
-                }}
-                onMouseEnter={(e) => setTooltip({ show: true, text: "Talk to my AI Assistant", icon: 'bot', x: e.clientX, y: e.clientY })}
-                onMouseMove={(e) => setTooltip(prev => ({ ...prev, x: e.clientX, y: e.clientY }))}
-                onMouseLeave={() => setTooltip(prev => ({ ...prev, show: false }))}
+                className="mx-[0.05em] relative"
               >
-                <Bot className="w-[0.85em] h-[0.85em] text-yellow-500 fill-yellow-500/10 group-hover:text-yellow-400 group-hover:fill-yellow-400/20 transition-colors" />
+                <Bot className="w-[0.85em] h-[0.85em] text-yellow-500 fill-yellow-500/10" />
               </div>
               <span className="">DEV</span>
             </motion.h1>

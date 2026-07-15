@@ -159,19 +159,18 @@ function MegaBoxSmall({ href, icon: Icon, title, desc, theme, pathname }: any) {
 }
 
 function SidebarLink({ href, icon: Icon, title, desc, theme, pathname }: any) {
-    const isChat = href === '#';
-    const isActive = pathname === href || (href !== '#' && pathname?.startsWith(`${href}/`));
+    const isActive = pathname === href || pathname?.startsWith(`${href}/`);
     
     const className = cn(
         "group flex items-center gap-4 rounded-2xl border p-4 transition-all duration-500 overflow-hidden relative",
         theme === 'dark'
             ? cn("bg-[#161616] hover:bg-[#1f1f1f]", isActive ? "border-[#D1FF4D]/50 shadow-[0_0_15px_rgba(209,255,77,0.05)]" : "border-white/10 hover:border-white/20")
             : cn("hover:bg-white", isActive ? "bg-white border-[#D1FF4D]/80 shadow-sm shadow-[#D1FF4D]/10" : "bg-black/[0.02] border-black/10 hover:border-black/20"),
-        isChat ? "cursor-not-allowed opacity-70" : "cursor-pointer hover:scale-[1.02] hover:-translate-x-1 hover:shadow-xl"
+        "cursor-pointer hover:scale-[1.02] hover:-translate-x-1 hover:shadow-xl"
     );
 
-    const content = (
-        <>
+    return (
+        <Link href={href} className={className}>
             <div className="flex-1 relative z-10">
                 <h4 className={cn("font-bold text-sm mb-1.5 transition-colors duration-300 flex items-center", theme === 'dark' ? (isActive ? "text-[#D1FF4D]" : "text-white") : (isActive ? "text-[#8cb815]" : "text-black"))}>
                     {title}
@@ -182,26 +181,10 @@ function SidebarLink({ href, icon: Icon, title, desc, theme, pathname }: any) {
             <Icon className={cn("w-5 h-5 relative z-10 transition-transform duration-500 group-hover:scale-125 group-hover:-rotate-6", theme === 'dark' ? (isActive ? "text-[#D1FF4D]" : "text-white/40 group-hover:text-white/80") : (isActive ? "text-[#8cb815]" : "text-black/40 group-hover:text-black/80"))} />
             
             {/* Subtle highlight */}
-            {!isChat && (
-                <div className={cn(
-                    "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none",
-                    theme === 'dark' ? "bg-gradient-to-r from-transparent to-white/[0.02]" : "bg-gradient-to-r from-transparent to-black/[0.02]"
-                )} />
-            )}
-        </>
-    );
-
-    if (isChat) {
-        return (
-            <div className={className}>
-                {content}
-            </div>
-        );
-    }
-
-    return (
-        <Link href={href} className={className}>
-            {content}
+            <div className={cn(
+                "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none",
+                theme === 'dark' ? "bg-gradient-to-r from-transparent to-white/[0.02]" : "bg-gradient-to-r from-transparent to-black/[0.02]"
+            )} />
         </Link>
     )
 }

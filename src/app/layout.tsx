@@ -67,9 +67,10 @@ export const metadata: Metadata = {
     },
     icons: {
         icon: [
-            { url: '/Arfazrll_light.svg', media: '(prefers-color-scheme: light)' },
-            { url: '/Arfazrll_dark.svg', media: '(prefers-color-scheme: dark)' },
+            { url: '/L logo.jpg' },
         ],
+        shortcut: '/L logo.jpg',
+        apple: '/L logo.jpg',
     },
 };
 
@@ -86,7 +87,7 @@ export const viewport: Viewport = {
 import { ThemeAwareClickSpark } from '@/components/ui/ThemeAwareClickSpark';
 import { ConditionalNavigation } from '@/components/layout/ConditionalNavigation';
 import { ArcPreloaderWrapper } from '@/components/layout/ArcPreloaderWrapper';
-import { ChatBot } from '@/components/layout/ChatBot';
+
 
 export default async function RootLayout({
     children,
@@ -108,7 +109,7 @@ export default async function RootLayout({
                                         {children}
                                     </ConditionalNavigation>
                                 </ArcPreloaderWrapper>
-                                <ChatBot headless />
+
                             </ThemeAwareClickSpark>
                         </SmoothScrollProvider>
                     </I18nProvider>

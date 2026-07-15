@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { Send, CheckCircle, AlertCircle, Loader2, Disc, Music, ArrowUpRight, Sparkles, HelpCircle, MessageSquare, ExternalLink, Github, Linkedin, Twitter, Instagram, ChevronDown } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Loader2, Disc, Music, ArrowUpRight, Sparkles, HelpCircle, MessageSquare, ExternalLink, Github, Linkedin, Twitter, Instagram, ChevronDown, Copy, Check, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { portfolioData } from '@/data/portfolio';
 import dynamic from 'next/dynamic';
@@ -51,7 +51,8 @@ const socialIconsMap: Record<string, React.ElementType> = {
     twitter: Twitter,
     instagram: Instagram,
     discord: Disc,
-    spotify: Music
+    spotify: Music,
+    email: Mail
 };
 
 function SocialCard({ item }: { item: any }) {
@@ -118,89 +119,7 @@ const InputGroup = ({ label, name, type = "text", value, onChange, required = fa
     );
 };
 
-function ContactForm() {
-    const t = useTranslations('contact');
-    const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus('loading');
-
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (response.ok) {
-                setStatus('success');
-                setFormData({ name: '', email: '', subject: '', message: '' });
-            } else {
-                setStatus('error');
-            }
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            setStatus('error');
-        } finally {
-            setTimeout(() => setStatus('idle'), 3000);
-        }
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-
-    return (
-        <div className="w-full relative z-20">
-            {/* Typography Header - Creative & Big */}
-            <div className="mb-16">
-                <h2 className="text-5xl md:text-7xl font-black tracking-tight text-foreground relative z-10">
-                    {t('hero.title')}
-                </h2>
-                <p className="text-lg text-muted-foreground mt-4 font-light max-w-md">
-                    {t('hero.subtitle')}
-                </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="w-full relative z-10">
-                <InputGroup label={t('form.name')} name="name" value={formData.name} onChange={handleChange} required />
-                <InputGroup label={t('form.email')} name="email" type="email" value={formData.email} onChange={handleChange} required />
-                <InputGroup label={t('form.subject')} name="subject" value={formData.subject} onChange={handleChange} required />
-                <InputGroup
-                    label={t('form.messagePlaceholder')} // Using placeholder label style
-                    name="message"
-                    type="textarea"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                />
-
-                {/* Creative Large Button */}
-                <motion.button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="group relative w-full flex items-center justify-between border-b-2 border-foreground py-8 text-left hover:bg-foreground/5 transition-colors disabled:opacity-50"
-                    whileTap={{ scale: 0.98 }}
-                >
-                    <span className="text-3xl md:text-4xl font-bold tracking-tight text-foreground group-hover:pl-4 transition-all duration-300">
-                        {status === 'loading' ? t('form.sending') : status === 'success' ? t('form.sent') : t('form.submit')}
-                    </span>
-
-                    <div className="relative overflow-hidden w-12 h-12 flex items-center justify-center rounded-full bg-foreground text-background group-hover:scale-110 transition-transform duration-500">
-                        {status === 'loading' ? <Loader2 className="w-6 h-6 animate-spin" /> :
-                            status === 'success' ? <CheckCircle className="w-6 h-6" /> :
-                                <ArrowUpRight className="w-6 h-6 group-hover:rotate-45 transition-transform duration-300" />
-                        }
-                    </div>
-                </motion.button>
-            </form>
-        </div>
-    );
-}
 
 function FAQSection() {
     const t = useTranslations('contact');
@@ -288,7 +207,8 @@ const socialDescriptions: Record<string, string> = {
     Twitter: "Thoughts",
     Instagram: "Lifestyle",
     Discord: "Community",
-    Spotify: "Music"
+    Spotify: "Music",
+    Email: "Direct Contact"
 };
 
 import { usePerformance } from '@/hooks/usePerformance';
@@ -298,6 +218,15 @@ export default function ContactPage() {
     const { isLowPowerMode } = usePerformance();
 
     const getSocialItem = (platform: string) => {
+        if (platform === 'email') {
+            return {
+                name: "Email",
+                username: "gokulr.1105@gmail.com",
+                body: "Direct Contact",
+                image: Mail,
+                url: "mailto:gokulr.1105@gmail.com"
+            };
+        }
         const link = portfolioData.personal.socialLinks.find(l => l.platform.toLowerCase() === platform);
         return {
             name: (link?.platform || platform).charAt(0).toUpperCase() + (link?.platform || platform).slice(1),
@@ -308,8 +237,8 @@ export default function ContactPage() {
         };
     };
 
-    const row1Real = ['linkedin', 'github'].map(getSocialItem);
-    const row2Real = ['instagram', 'discord'].map(getSocialItem);
+    const row1Real = ['linkedin', 'github', 'email'].map(getSocialItem);
+    const row2Real = ['instagram', 'discord', 'email'].map(getSocialItem);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -379,14 +308,6 @@ export default function ContactPage() {
                             </div>
                         </motion.div>
 
-                        {/* Contact Form */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <ContactForm />
-                        </motion.div>
 
                     </div>
                 </div>

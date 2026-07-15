@@ -21,8 +21,7 @@ import {
     X,
     Gamepad2,
     Music,
-    Bot,
-    Focus
+
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -33,7 +32,7 @@ type SocialIconComponent = typeof Github;
 const socialIcons: { [key: string]: SocialIconComponent } = {
     github: Github,
     linkedin: Linkedin,
-    twitter: Bot, // Replaced Twitter logo with AI Bot logo
+    twitter: Twitter,
     instagram: Instagram,
     discord: Gamepad2,
     spotify: Music,
@@ -167,7 +166,7 @@ export function Footer() {
         .filter((s: SocialLink) => s.platform !== 'Discord' && s.platform !== 'Spotify')
         .slice(0, 4);
 
-    const expandedSocials = previewSocials.filter((s: SocialLink) => s.platform !== 'Twitter');
+    const expandedSocials = previewSocials;
 
     return (
         <>
@@ -220,26 +219,9 @@ export function Footer() {
                                         const Icon = socialIcons[social.icon];
                                         return (
                                             <Fragment key={social.platform}>
-                                                {social.platform === 'Twitter' && (
-                                                    <motion.a
-                                                        href="https://portfolio-omega-liard-49.vercel.app/"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="p-1.5 rounded-full hover:bg-foreground/5 transition-all text-muted-foreground hover:text-foreground hover:scale-110 active:scale-95"
-                                                        aria-label="Workspace"
-                                                    >
-                                                        <Focus className="w-4 h-4" />
-                                                    </motion.a>
-                                                )}
-                                                <motion.a
+                                            <motion.a
                                                     key={social.platform}
-                                                    href={social.platform === 'Twitter' ? undefined : social.url}
-                                                    onClick={social.platform === 'Twitter' ? (e) => {
-                                                        e.preventDefault();
-                                                        window.dispatchEvent(new CustomEvent('portfolio:toggle-chatbot', {
-                                                            detail: { x: window.innerWidth / 2, y: window.innerHeight / 2 }
-                                                        }));
-                                                    } : undefined}
+                                                    href={social.url}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="p-1.5 rounded-full hover:bg-foreground/5 transition-all text-muted-foreground hover:text-foreground hover:scale-110 active:scale-95"

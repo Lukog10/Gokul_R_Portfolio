@@ -32,7 +32,8 @@ import {
   Book,
   GraduationCap,
   Moon,
-  Check
+  Check,
+  ExternalLink
 } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useInView, animate } from 'framer-motion';
@@ -290,6 +291,18 @@ export const KaggleShowcase = () => {
                 profile <span className="text-[#20beff]">In-Production.</span>
               </span>
             </motion.h2>
+            <motion.div layout className="pt-1">
+              <a
+                href={`https://www.kaggle.com/${KAGGLE_USER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#20beff] hover:text-[#20beff]/80 transition-colors relative z-20 group"
+              >
+                <span>View Public Profile</span>
+                <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+            </motion.div>
             <motion.div layout className='flex flex-row gap-8 items-center'>
               <div className="flex flex-col">
                 <span className="text-3xl font-black text-[#20beff] tabular-nums tracking-tighter">
@@ -357,6 +370,17 @@ export const KaggleShowcase = () => {
                       Verified Kaggle <br />
                       <span className="flex items-center gap-2">profile <span className="text-[#20beff]">In-Production.</span></span>
                     </h2>
+                    <div className="pt-1">
+                      <a
+                        href={`https://www.kaggle.com/${KAGGLE_USER}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#20beff] hover:text-[#20beff]/80 transition-colors relative z-20 group"
+                      >
+                        <span>View Public Profile</span>
+                        <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </a>
+                    </div>
                   </div>
                 </div>
 

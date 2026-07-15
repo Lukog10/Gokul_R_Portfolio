@@ -45,6 +45,7 @@ export interface Experience {
     externalLink?: string | string[];
     keyLearnings?: string[];
     impact?: string[];
+    note?: string;
 }
 
 export interface Education {
